@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using HanoiDevDays.CrossClock.Models;
+using HanoiDevDays.CrossClock.DTOs;
+using System.Linq;
 
 namespace HanoiDevDays.CrossClock
 {
@@ -17,21 +19,27 @@ namespace HanoiDevDays.CrossClock
         {
             InitializeComponent();
             worldClockItems = new List<WorldClockItemModel>(12);
-            lstClocks.ItemsSource = worldClockItems;
+            lstClocks.ItemSelected += delegate
+            {
+                lstClocks.SelectedItem = null;
+            };
             btnAdd.Clicked += HandleAddButtonClicked;
 
             random = new Random();
         }
 
-        void HandleAddButtonClicked(object sender, EventArgs e)
+        async void HandleAddButtonClicked(object sender, EventArgs e)
         {
-            worldClockItems.Add(new WorldClockItemModel
-            {
-                City = "Hanoi",
-                TimeZone = random.Next(10000, 100000),
-                CurrentTime = DateTime.Now.AddHours(random.Next(0, 12))
-            });
-            ReloadData();
+            //worldClockItems.Add(new WorldClockItemModel
+            //{
+            //    City = "Hanoi",
+            //    TimeZone = random.Next(10000, 100000),
+            //    CurrentTime = DateTime.Now.AddHours(random.Next(0, 12))
+            //});
+
+            var chooserPage = new WorldClockChooserPage();
+            chooserPage.TimeZoneSelected += HandleTimeZomeSelected;
+            await Navigation.PushAsync(chooserPage);
         }
 
         public void HandleDeleteButtonClicked(object sender, EventArgs e)
@@ -39,6 +47,24 @@ namespace HanoiDevDays.CrossClock
             var mi = ((MenuItem)sender);
 
             worldClockItems.Remove((WorldClockItemModel)mi.CommandParameter);
+            ReloadData();
+        }
+
+        void HandleTimeZomeSelected(object sender, TimeZoneDto timeZone)
+        {
+            var timeZoneAdded = worldClockItems.Any(x => timeZone.ZoneName.EndsWith($"/{x.City}", StringComparison.OrdinalIgnoreCase));
+            if (timeZoneAdded)
+            {
+                return;
+            }
+
+            worldClockItems.Add(new WorldClockItemModel
+            {
+                TimeZone = timeZone.GmtOffset,
+                City = timeZone.ZoneName.Split('/')[1],
+                CurrentTime = new DateTime(timeZone.Timestamp)
+            });
+
             ReloadData();
         }
 
