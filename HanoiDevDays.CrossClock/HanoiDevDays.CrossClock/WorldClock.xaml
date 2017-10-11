@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:HanoiDevDays.CrossClock.Controls"
+    x:Class="HanoiDevDays.CrossClock.WorldClock"
+    BackgroundColor="Black"
+    Title="World Clock">
+    <ListView
+        x:Name="lstClocks"
+        RowHeight="80"
+        CachingStrategy="RecycleElement"
+        BackgroundColor="Black">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <controls:WorldClockItemView />
+                </ViewCell> 
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

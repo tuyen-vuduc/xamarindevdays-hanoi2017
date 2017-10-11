@@ -13,7 +13,11 @@ namespace HanoiDevDays.CrossClock
         {
             InitializeComponent();
 
-            MainPage = new HanoiDevDays.CrossClock.MainPage();
+            MainPage = new NavigationPage(new WorldClock())
+            {
+                BarBackgroundColor = Color.Black,
+                BarTextColor = Color.White
+            };
         }
 
         protected override void OnStart()

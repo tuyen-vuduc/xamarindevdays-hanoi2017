@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="HanoiDevDays.CrossClock.Controls.WorldClockItemView">
+    <Grid
+        Padding="16"
+        >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+        </Grid.RowDefinitions>
+        <Label
+            VerticalTextAlignment="Start"
+            Text="Today, +0HRS"
+            FontSize="16"
+            TextColor="LightGray" />
+        <Label
+            VerticalTextAlignment="End"
+            Text="Hanoi"
+            FontSize="24"
+            TextColor="White" />
+        <Label
+            VerticalTextAlignment="Center"
+            HorizontalTextAlignment="End"
+            TextColor="White">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span
+                        Text="12:00"
+                        FontSize="48" />
+                    <Span
+                        Text="PM"
+                        FontSize="24"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+    </Grid>
+</ContentView>
