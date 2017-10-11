@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
+using HanoiDevDays.CrossClock.Models;
 
 namespace HanoiDevDays.CrossClock.Controls
 {
@@ -15,6 +12,17 @@ namespace HanoiDevDays.CrossClock.Controls
         public WorldClockItemView()
         {
             InitializeComponent();
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+
+            var worldClockItemModel = (WorldClockItemModel)BindingContext;
+
+            lblCity.Text = worldClockItemModel.City;
+            lblCurrentTime.Text = worldClockItemModel.CurrentTime.ToString("hh:mm");
+            lblAMPM.Text = worldClockItemModel.CurrentTime.Hour > 12 ? "PM" : "AM";
         }
     }
 }

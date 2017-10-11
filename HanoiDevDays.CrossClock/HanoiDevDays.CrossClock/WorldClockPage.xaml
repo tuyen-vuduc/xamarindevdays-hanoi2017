@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:HanoiDevDays.CrossClock.Controls"
+    x:Class="HanoiDevDays.CrossClock.WorldClockPage"
+    BackgroundColor="{StaticResource ColorPrimaryDark}"
+    Title="World Clock">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Add"
+            Icon="ic_plus.png"
+            x:Name="btnAdd" />
+    </ContentPage.ToolbarItems>
+    <Grid
+        RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="1" />
+        </Grid.RowDefinitions>
+        <BoxView
+            Grid.Row="0"
+            BackgroundColor="{StaticResource ColorSeparatorPrimary}" />
+        <ListView
+            Grid.Row="1"
+            x:Name="lstClocks"
+            RowHeight="97"
+            SeparatorVisibility="None"
+            CachingStrategy="RecycleElement"
+            BackgroundColor="Transparent">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem
+                                Clicked="HandleDeleteButtonClicked"
+                                CommandParameter="{Binding .}"
+                                Text="Delete"
+                                IsDestructive="True" />
+                        </ViewCell.ContextActions>
+                        <controls:WorldClockItemView
+                            BackgroundColor="{StaticResource ColorPrimary}" />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>

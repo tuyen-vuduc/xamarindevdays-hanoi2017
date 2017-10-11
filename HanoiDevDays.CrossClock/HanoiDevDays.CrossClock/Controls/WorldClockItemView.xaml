@@ -1,38 +1,53 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="HanoiDevDays.CrossClock.Controls.WorldClockItemView">
-    <Grid
-        Padding="16"
+    <StackLayout
+        Spacing="0"
+        Orientation="Vertical"
         >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="48" />
-        </Grid.RowDefinitions>
-        <Label
-            VerticalTextAlignment="Start"
-            Text="Today, +0HRS"
-            FontSize="16"
-            TextColor="LightGray" />
-        <Label
-            VerticalTextAlignment="End"
-            Text="Hanoi"
-            FontSize="24"
-            TextColor="White" />
-        <Label
-            VerticalTextAlignment="Center"
-            HorizontalTextAlignment="End"
-            TextColor="White">
-            <Label.FormattedText>
-                <FormattedString>
-                    <Span
-                        Text="12:00"
-                        FontSize="48" />
-                    <Span
-                        Text="PM"
-                        FontSize="24"/>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </Grid>
+        <Grid
+            Padding="16,20">
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="56" />
+            </Grid.RowDefinitions>
+            <Label
+                VerticalTextAlignment="Start"
+                Text="Today, +0HRS"
+                FontSize="16"
+                TextColor="{StaticResource ColorTextSecondary}" />
+            <Label
+                VerticalTextAlignment="End"
+                x:Name="lblCity"
+                Text="Hanoi"
+                FontSize="28"
+                TextColor="{StaticResource ColorTextPrimary}" />
+            <Label
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="End"
+                TextColor="{StaticResource ColorTextPrimary}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span
+                            x:Name="lblCurrentTime"
+                            Text="12:00">
+                            <Span.FontSize>
+                                <OnPlatform
+                                    x:TypeArguments="x:Double"
+                                    Android="48"
+                                    iOS="56" />
+                            </Span.FontSize>
+                        </Span>
+                        <Span
+                            x:Name="lblAMPM"
+                            Text="PM"
+                            FontSize="28" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </Grid>
+        <BoxView HeightRequest="1" BackgroundColor="{StaticResource ColorSeparatorPrimary}" />
+    </StackLayout>
 </ContentView>

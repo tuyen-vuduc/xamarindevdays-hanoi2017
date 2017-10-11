@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 using Xamarin.Forms;
 
 namespace HanoiDevDays.CrossClock
@@ -13,10 +9,10 @@ namespace HanoiDevDays.CrossClock
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new WorldClock())
+            MainPage = new NavigationPage(new WorldClockPage())
             {
-                BarBackgroundColor = Color.Black,
-                BarTextColor = Color.White
+                BarBackgroundColor = (Color)Resources["ColorPrimary"],
+                BarTextColor = (Color)Resources["ColorTextPrimary"]
             };
         }
 

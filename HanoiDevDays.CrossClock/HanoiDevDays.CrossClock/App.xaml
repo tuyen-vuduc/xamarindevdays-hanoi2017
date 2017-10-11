@@ -1,10 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HanoiDevDays.CrossClock.App">
-	<Application.Resources>
-
-		<!-- Application resource dictionary -->
-
-	</Application.Resources>
+<?xml version="1.0" encoding="utf-8"?>
+<Application
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="HanoiDevDays.CrossClock.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color
+                x:Key="ColorPrimary">#181818</Color>
+            <Color
+                x:Key="ColorPrimaryDark">#0D0D0D</Color>
+            <Color
+                x:Key="ColorAccent">#FF9602</Color>
+            <Color
+                x:Key="ColorTextPrimary">#FEFEFE</Color>
+            <Color
+                x:Key="ColorTextSecondary">#8F8E94</Color>
+            <Color
+                x:Key="ColorSeparatorPrimary">#333333</Color>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>
