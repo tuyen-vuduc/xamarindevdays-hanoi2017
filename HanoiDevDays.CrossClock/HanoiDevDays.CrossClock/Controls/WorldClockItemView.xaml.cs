@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using HanoiDevDays.CrossClock.Models;
+using System;
 
 namespace HanoiDevDays.CrossClock.Controls
 {
@@ -21,8 +22,24 @@ namespace HanoiDevDays.CrossClock.Controls
             var worldClockItemModel = (WorldClockItemModel)BindingContext;
 
             lblCity.Text = worldClockItemModel.City;
-            lblCurrentTime.Text = worldClockItemModel.CurrentTime.ToString("hh:mm");
-            lblAMPM.Text = worldClockItemModel.CurrentTime.Hour > 12 ? "PM" : "AM";
+
+            UpdateTime();
+        }
+
+        internal void UpdateTime()
+        {
+            var worldClockItemModel = (WorldClockItemModel)BindingContext;
+
+            var zoneDate = DateTime.Now.ToUniversalTime().AddTicks(worldClockItemModel.GmtOffset);
+
+            lblCurrentTime.Text = zoneDate.ToString("hh:mm");
+
+            lblAMPM.Text = zoneDate.Hour > 12 ? "PM" : "AM";
+
+            var diff = zoneDate - DateTime.Now;
+            lblZone.Text = diff.Hours > 0
+                ? $"Today, +{diff.Hours.ToString("D2")}HRS"
+                : $"Today, {diff.Hours.ToString("D2")}HRS";
         }
     }
 }

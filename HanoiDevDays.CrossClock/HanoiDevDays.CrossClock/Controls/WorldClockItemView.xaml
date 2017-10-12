@@ -13,8 +13,8 @@
                     Height="56" />
             </Grid.RowDefinitions>
             <Label
+                x:Name="lblZone"
                 VerticalTextAlignment="Start"
-                Text="Today, +0HRS"
                 FontSize="16"
                 TextColor="{StaticResource ColorTextSecondary}" />
             <Label

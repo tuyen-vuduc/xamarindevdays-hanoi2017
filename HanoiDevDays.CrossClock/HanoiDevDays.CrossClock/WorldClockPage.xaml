@@ -32,17 +32,8 @@
             BackgroundColor="Transparent">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <ViewCell.ContextActions>
-                            <MenuItem
-                                Clicked="HandleDeleteButtonClicked"
-                                CommandParameter="{Binding .}"
-                                Text="Delete"
-                                IsDestructive="True" />
-                        </ViewCell.ContextActions>
-                        <controls:WorldClockItemView
-                            BackgroundColor="{StaticResource ColorPrimary}" />
-                    </ViewCell>
+                    <controls:WorldClockItemViewCell
+                        DeleteAction="HandleDeleteButtonClicked" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

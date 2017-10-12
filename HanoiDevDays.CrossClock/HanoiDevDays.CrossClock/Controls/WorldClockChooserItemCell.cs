@@ -39,7 +39,7 @@ namespace HanoiDevDays.CrossClock.Controls
 
             var data = (TimeZoneDto)BindingContext;
 
-            lblCity.Text = $"{data.ZoneName.Split('/')[1]}, {data.CountryName}";
+            lblCity.Text = $"{data.ZoneName.Split('/').Last()}, {data.CountryName}";
         }
     }
 }
