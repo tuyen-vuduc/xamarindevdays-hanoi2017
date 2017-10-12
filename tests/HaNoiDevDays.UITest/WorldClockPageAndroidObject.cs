@@ -9,10 +9,8 @@ namespace HaNoiDevDays.UITest
 {
     public class WorldClockPageAndroidObject : WorldClockPageObject
     {
-        IApp app;
         public WorldClockPageAndroidObject(IApp app) : base(app)
         {
-            this.app = app;
         }
 
         public override void DeleteClock(int index)

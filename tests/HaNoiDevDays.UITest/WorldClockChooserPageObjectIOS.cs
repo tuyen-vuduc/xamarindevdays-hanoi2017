@@ -4,7 +4,7 @@ namespace HaNoiDevDays.UITest
 {
     public class WorldClockChooserPageObjectIOS : WorldClockChooserPageObject
     {
-        public override Func<Xamarin.UITest.Queries.AppQuery, Xamarin.UITest.Queries.AppQuery> EntryQuerry
+        public override Func<Xamarin.UITest.Queries.AppQuery, Xamarin.UITest.Queries.AppQuery> EntryQuery
         {
             get => c => c.Marked("txtQuery");
         }

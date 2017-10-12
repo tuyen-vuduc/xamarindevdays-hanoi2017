@@ -10,7 +10,7 @@ namespace HaNoiDevDays.UITest
 {
     public class WorldClockPageObject
     {
-        IApp app;
+        protected readonly IApp app;
         public virtual Func<AppQuery, AppQuery> MenuItemAdd
         {
             get => c => c.Marked("Add");

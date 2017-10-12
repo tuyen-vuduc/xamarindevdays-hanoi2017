@@ -17,7 +17,7 @@ namespace HaNoiDevDays.UITest
         WorldClockPageObject worldClock;
         WorldClockChooserPageObject worldClockChooser;
 
-        string[] querries = {
+        string[] Queries = {
             "at",
         };
 
@@ -47,22 +47,22 @@ namespace HaNoiDevDays.UITest
         public void TestAddFiveClocksSuccess()
         {
             Random random = new Random();
-            app.Screenshot("Word Clock screen.");
+            app.Screenshot("World Clock screen.");
 
             worldClock.AddClock();
-            app.Screenshot("Word Clock Chooser screen.");
+            app.Screenshot("World Clock Chooser screen.");
 
-            var query = querries[random.Next(1, 100) % querries.Length];
+            var query =Queries[random.Next(1, 100) %Queries.Length];
             worldClockChooser.SearchCity(query);
             app.Screenshot("search city " + query);
 
             if (worldClockChooser.CountCitiesChilds == 0)
             {
-                worldClockChooser.ClearQuerry();
+                worldClockChooser.ClearQuery();
             }
 
             worldClockChooser.SelectCity(random.Next(1, 100) % worldClockChooser.CountCitiesChilds);
-            app.Screenshot("Word Clock screen after add clock.");
+            app.Screenshot("World Clock screen after add clock.");
 
             worldClock.DeleteClock(0);
         }

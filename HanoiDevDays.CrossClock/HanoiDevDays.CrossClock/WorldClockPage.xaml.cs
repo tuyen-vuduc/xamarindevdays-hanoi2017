@@ -19,6 +19,8 @@ namespace HanoiDevDays.CrossClock
         {
             InitializeComponent();
             worldClockItems = new List<WorldClockItemModel>(12);
+            lstClocks.ItemsSource = worldClockItems;
+
             lstClocks.ItemSelected += delegate
             {
                 lstClocks.SelectedItem = null;

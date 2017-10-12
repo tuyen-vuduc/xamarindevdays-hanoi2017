@@ -10,13 +10,12 @@ namespace HaNoiDevDays.UITest
 {
     public class WorldClockChooserPageObject
     {
-        IApp app;
-        public virtual Func<AppQuery, AppQuery> EntryQuerry
+        public virtual Func<AppQuery, AppQuery> EntryQuery
         {
             get => c => c.Marked("search_src_text");
         }
 
-        public virtual Func<AppQuery, AppQuery> ButtonClearQuerry
+        public virtual Func<AppQuery, AppQuery> ButtonClearQuery
         {
             get => c => c.Marked("Clear query");
         }
@@ -41,19 +40,21 @@ namespace HaNoiDevDays.UITest
             get => app.Query(ListViewCitiesChilds).Count();
         }
 
-        public void ClearQuerry()
-        {
-            app.Tap(ButtonClearQuerry);
-        }
+        protected readonly IApp app;
 
         public WorldClockChooserPageObject(IApp app)
         {
             this.app = app;
         }
 
+        public void ClearQuery()
+        {
+            app.Tap(ButtonClearQuery);
+        }
+
         public void SearchCity(string city)
         {
-            app.EnterText(EntryQuerry, city);
+            app.EnterText(EntryQuery, city);
             app.PressEnter();
             app.DismissKeyboard();
         }
