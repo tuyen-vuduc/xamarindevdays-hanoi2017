@@ -13,19 +13,11 @@ namespace HanoiDevDays.CrossClock
         {
             InitializeComponent();
 
-            lstCities.ItemsSource = TimeZoneData.GetTimeZones();
-            txtQuery.SearchButtonPressed += delegate
-            {
-                var query = txtQuery.Text?.ToUpper() ?? string.Empty;
-                lstCities.ItemsSource = TimeZoneData
-                    .GetTimeZones()
-                    .Where(x => x.ZoneName.ToUpper().Contains(query))
-                    .ToList();
-            };
+            BindingContext = new WorldClockChooserPageViewModel(Navigation);
 
             lstCities.ItemSelected += async delegate
             {
-                TimeZoneSelected?.Invoke(this, (TimeZoneDto) lstCities.SelectedItem);
+                TimeZoneSelected?.Invoke(this, (TimeZoneDto)lstCities.SelectedItem);
                 await Navigation.PopAsync();
             };
         }

@@ -1,15 +1,9 @@
-﻿using System;
-using Xamarin.Forms;
-using HanoiDevDays.CrossClock.Models;
+﻿using Xamarin.Forms;
 namespace HanoiDevDays.CrossClock.Controls
 {
     public class WorldClockItemViewCell : ViewCell
     {
-        public event EventHandler<WorldClockItemModel> DeleteAction;
-        
         readonly WorldClockItemView view;
-
-        MenuItem btnDelete;
 
         public WorldClockItemViewCell()
         {
@@ -18,17 +12,6 @@ namespace HanoiDevDays.CrossClock.Controls
             };
 
             View = view;
-
-            btnDelete = new MenuItem
-            {
-                Text = "Delete",
-                IsDestructive = true,
-            };
-            btnDelete.Clicked += delegate {
-                DeleteAction?.Invoke(this, (WorldClockItemModel)BindingContext);
-            };
-
-            ContextActions.Add(btnDelete);
         }
 
         protected override void OnAppearing()

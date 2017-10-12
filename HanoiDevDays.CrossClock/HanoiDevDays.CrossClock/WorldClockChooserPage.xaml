@@ -15,7 +15,8 @@
             />
         <SearchBar 
             BackgroundColor="{StaticResource ColorPrimary}"
-            x:Name="txtQuery"
+            SearchCommand="{Binding SearchCommand}"
+            Text="{Binding Query}"
             AutomationId="txtQuery"
             Placeholder="Search for city">
             <SearchBar.TextColor>
@@ -41,6 +42,7 @@
             SeparatorColor="{StaticResource ColorSeparatorPrimary}"
             BackgroundColor="{StaticResource ColorPrimary}"
             RowHeight="48"
+            ItemsSource="{Binding Cities}"
             >
             <ListView.ItemTemplate>
                 <DataTemplate>

@@ -8,10 +8,11 @@
     Title="World Clock">
     <ContentPage.ToolbarItems>
         <ToolbarItem
+            Command="{Binding AddClockCommand}"
             Text="Add"
             Icon="ic_plus.png"
             x:Name="btnAdd"
-            AutomationId="btnAdd"/>
+            AutomationId="btnAdd" />
     </ContentPage.ToolbarItems>
     <Grid
         RowSpacing="0">
@@ -29,11 +30,20 @@
             RowHeight="97"
             SeparatorVisibility="None"
             CachingStrategy="RecycleElement"
-            BackgroundColor="Transparent">
+            BackgroundColor="Transparent"
+            ItemsSource="{Binding Clocks}"
+            >
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <controls:WorldClockItemViewCell
-                        DeleteAction="HandleDeleteButtonClicked" />
+                    <controls:WorldClockItemViewCell>
+                        <controls:WorldClockItemView.ContextActions>
+                            <MenuItem
+                                Command="{Binding BindingContext.DeleteClockCommand, Source={Reference lstClocks}}"
+                                CommandParameter="{Binding .}"
+                                Text="Delete"
+                                IsDestructive="true" />
+                        </controls:WorldClockItemView.ContextActions>
+                    </controls:WorldClockItemViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

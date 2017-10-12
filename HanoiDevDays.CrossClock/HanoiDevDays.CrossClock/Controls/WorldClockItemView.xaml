@@ -2,7 +2,14 @@
 <ContentView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:HanoiDevDays.CrossClock.Converters"
     x:Class="HanoiDevDays.CrossClock.Controls.WorldClockItemView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:ZoneDiffValueConverter
+                x:Key="ZoneDiffValueConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
     <StackLayout
         Spacing="0"
         Orientation="Vertical">
@@ -16,36 +23,37 @@
                 x:Name="lblZone"
                 VerticalTextAlignment="Start"
                 FontSize="16"
+                Text="{Binding ZoneTime, Converter={StaticResource ZoneDiffValueConverter}}"
                 TextColor="{StaticResource ColorTextSecondary}" />
             <Label
                 VerticalTextAlignment="End"
                 x:Name="lblCity"
-                Text="Hanoi"
+                Text="{Binding City}"
                 FontSize="28"
                 TextColor="{StaticResource ColorTextPrimary}" />
-            <Label
-                VerticalTextAlignment="Center"
-                HorizontalTextAlignment="End"
-                TextColor="{StaticResource ColorTextPrimary}">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span
-                            x:Name="lblCurrentTime"
-                            Text="12:00">
-                            <Span.FontSize>
-                                <OnPlatform
-                                    x:TypeArguments="x:Double"
-                                    Android="48"
-                                    iOS="56" />
-                            </Span.FontSize>
-                        </Span>
-                        <Span
-                            x:Name="lblAMPM"
-                            Text="PM"
-                            FontSize="28" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="EndAndExpand"
+                Spacing="0">
+                <Label
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="End"
+                    Text="{Binding ZoneTime, StringFormat='{0:hh:mm}'}"
+                    TextColor="{StaticResource ColorTextPrimary}">
+                    <Label.FontSize>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="48"
+                            iOS="56" />
+                    </Label.FontSize>
+                </Label>
+                <Label
+                    VerticalTextAlignment="End"
+                    HorizontalTextAlignment="End"
+                    FontSize="28"
+                    Text="{Binding ZoneTime, StringFormat='{0:tt}'}"
+                    TextColor="{StaticResource ColorTextPrimary}" />
+            </StackLayout>
         </Grid>
         <BoxView
             HeightRequest="1"

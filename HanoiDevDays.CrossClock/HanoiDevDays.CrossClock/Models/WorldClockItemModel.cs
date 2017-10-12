@@ -5,6 +5,9 @@ namespace HanoiDevDays.CrossClock.Models
     {
         public string City { get; set; }
         public int GmtOffset { get; set; }
-        public DateTime CurrentTime { get; set; }
+        public DateTime ZoneTime
+        {
+            get => DateTime.Now.ToUniversalTime().AddTicks(GmtOffset);
+        }
     }
 }
