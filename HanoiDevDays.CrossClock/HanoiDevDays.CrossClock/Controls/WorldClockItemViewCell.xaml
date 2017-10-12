@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentView
+<ViewCell
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:converters="clr-namespace:HanoiDevDays.CrossClock.Converters"
-    x:Class="HanoiDevDays.CrossClock.Controls.WorldClockItemView">
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <converters:ZoneDiffValueConverter
-                x:Key="ZoneDiffValueConverter" />
-        </ResourceDictionary>
-    </ContentView.Resources>
+    x:Class="HanoiDevDays.CrossClock.Controls.WorldClockItemViewCell">
     <StackLayout
+        BackgroundColor="{StaticResource ColorPrimary}"
         Spacing="0"
         Orientation="Vertical">
         <Grid
@@ -59,4 +53,4 @@
             HeightRequest="1"
             BackgroundColor="{StaticResource ColorSeparatorPrimary}" />
     </StackLayout>
-</ContentView>
+</ViewCell>

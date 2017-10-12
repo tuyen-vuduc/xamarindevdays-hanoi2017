@@ -2,9 +2,12 @@
 <Application
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:HanoiDevDays.CrossClock.Converters"
     x:Class="HanoiDevDays.CrossClock.App">
     <Application.Resources>
         <ResourceDictionary>
+            <converters:ZoneDiffValueConverter
+                x:Key="ZoneDiffValueConverter" />
             <Color
                 x:Key="ColorPrimary">#181818</Color>
             <Color

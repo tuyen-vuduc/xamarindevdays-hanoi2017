@@ -1,39 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage
-	xmlns="http://xamarin.com/schemas/2014/forms"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:HanoiDevDays.CrossClock.Controls"
-	x:Class="HanoiDevDays.CrossClock.WorldClockChooserPage"
+    xmlns:converters="clr-namespace:HanoiDevDays.CrossClock.Converters"
+    x:Class="HanoiDevDays.CrossClock.WorldClockChooserPage"
     Title="Choose a city"
-    BackgroundColor="{StaticResource ColorPrimaryDark}"
-    >
-    <StackLayout Spacing="0">
-        <BoxView 
+    BackgroundColor="{StaticResource ColorPrimaryDark}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CityFromZoneValueConverter
+                x:Key="CityFromZoneValueConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout
+        Spacing="0">
+        <BoxView
             VerticalOptions="Start"
             HeightRequest="1"
-            BackgroundColor="{StaticResource ColorSeparatorPrimary}"
-            />
-        <SearchBar 
+            BackgroundColor="{StaticResource ColorSeparatorPrimary}" />
+        <SearchBar
             BackgroundColor="{StaticResource ColorPrimary}"
             SearchCommand="{Binding SearchCommand}"
             Text="{Binding Query}"
             AutomationId="txtQuery"
             Placeholder="Search for city">
             <SearchBar.TextColor>
-                <OnPlatform x:TypeArguments="Color" Android="{StaticResource ColorTextPrimary}" />
+                <OnPlatform
+                    x:TypeArguments="Color"
+                    Android="{StaticResource ColorTextPrimary}" />
             </SearchBar.TextColor>
             <SearchBar.CancelButtonColor>
-                <OnPlatform x:TypeArguments="Color" Android="{StaticResource ColorTextPrimary}" />
+                <OnPlatform
+                    x:TypeArguments="Color"
+                    Android="{StaticResource ColorTextPrimary}" />
             </SearchBar.CancelButtonColor>
             <SearchBar.PlaceholderColor>
-                <OnPlatform x:TypeArguments="Color" Android="{StaticResource ColorTextSecondary}" />
+                <OnPlatform
+                    x:TypeArguments="Color"
+                    Android="{StaticResource ColorTextSecondary}" />
             </SearchBar.PlaceholderColor>
         </SearchBar>
-        <BoxView 
+        <BoxView
             VerticalOptions="Start"
             HeightRequest="1"
-            BackgroundColor="{StaticResource ColorSeparatorPrimary}"
-            />
+            BackgroundColor="{StaticResource ColorSeparatorPrimary}" />
         <ListView
             x:Name="lstCities"
             AutomationId="lstCities"
@@ -42,11 +53,35 @@
             SeparatorColor="{StaticResource ColorSeparatorPrimary}"
             BackgroundColor="{StaticResource ColorPrimary}"
             RowHeight="48"
-            ItemsSource="{Binding Cities}"
-            >
+            ItemsSource="{Binding Cities}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <controls:WorldClockChooserItemCell />
+                    <ViewCell>
+                        <Grid
+                            BackgroundColor="{StaticResource ColorPrimary}">
+                            <StackLayout
+                                Orientation="Horizontal"
+                                Spacing="0"
+                                Margin="16,0">
+                                <Label
+                                    Text="{Binding ZoneName, Converter={StaticResource CityFromZoneValueConverter}}"
+                                    VerticalTextAlignment="Center"
+                                    TextColor="{StaticResource ColorTextPrimary}" />
+                                <Label
+                                    Text=", "
+                                    VerticalTextAlignment="Center"
+                                    TextColor="{StaticResource ColorTextPrimary}" />
+                                <Label
+                                    Text="{Binding CountryName}"
+                                    VerticalTextAlignment="Center"
+                                    TextColor="{StaticResource ColorTextPrimary}" />
+                            </StackLayout>
+                            <BoxView
+                                VerticalOptions="End"
+                                HeightRequest="1"
+                                BackgroundColor="{StaticResource ColorSeparatorPrimary}" />
+                        </Grid>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

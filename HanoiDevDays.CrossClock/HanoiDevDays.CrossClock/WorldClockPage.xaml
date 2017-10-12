@@ -3,9 +3,16 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:HanoiDevDays.CrossClock.Controls"
+    xmlns:converters="clr-namespace:HanoiDevDays.CrossClock.Converters"
     x:Class="HanoiDevDays.CrossClock.WorldClockPage"
     BackgroundColor="{StaticResource ColorPrimaryDark}"
     Title="World Clock">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ZoneDiffValueConverter
+                x:Key="ZoneDiffValueConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Command="{Binding AddClockCommand}"
@@ -36,13 +43,13 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <controls:WorldClockItemViewCell>
-                        <controls:WorldClockItemView.ContextActions>
+                        <controls:WorldClockItemViewCell.ContextActions>
                             <MenuItem
                                 Command="{Binding BindingContext.DeleteClockCommand, Source={Reference lstClocks}}"
                                 CommandParameter="{Binding .}"
                                 Text="Delete"
                                 IsDestructive="true" />
-                        </controls:WorldClockItemView.ContextActions>
+                        </controls:WorldClockItemViewCell.ContextActions>
                     </controls:WorldClockItemViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
