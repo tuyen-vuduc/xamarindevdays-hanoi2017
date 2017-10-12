@@ -52,6 +52,7 @@
     <Compile Include="DTOs\TimeZoneDto.cs" />
     <Compile Include="DTOs\TimeZoneData.cs" />
     <Compile Include="Controls\WorldClockChooserItemCell.cs" />
+    <Compile Include="Controls\WorldClockItemViewCell.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">

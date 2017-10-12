@@ -42,11 +42,10 @@ namespace HanoiDevDays.CrossClock
             await Navigation.PushAsync(chooserPage);
         }
 
-        public void HandleDeleteButtonClicked(object sender, EventArgs e)
+        public void HandleDeleteButtonClicked(object sender, WorldClockItemModel item)
         {
-            var mi = ((MenuItem)sender);
+            worldClockItems.Remove(item);
 
-            worldClockItems.Remove((WorldClockItemModel)mi.CommandParameter);
             ReloadData();
         }
 
@@ -60,9 +59,8 @@ namespace HanoiDevDays.CrossClock
 
             worldClockItems.Add(new WorldClockItemModel
             {
-                TimeZone = timeZone.GmtOffset,
-                City = timeZone.ZoneName.Split('/')[1],
-                CurrentTime = new DateTime(timeZone.Timestamp)
+                GmtOffset = timeZone.GmtOffset,
+                City = timeZone.ZoneName.Split('/').Last()
             });
 
             ReloadData();
