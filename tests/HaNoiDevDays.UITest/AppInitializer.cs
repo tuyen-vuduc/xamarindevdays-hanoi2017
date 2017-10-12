@@ -14,7 +14,8 @@ namespace HaNoiDevDays.UITest
             {
                 return ConfigureApp
                     .Android
-                    .InstalledApp("com.vuductuyen.hanoidevdays.crossclock")
+                    //.InstalledApp("com.vuductuyen.hanoidevdays.crossclock")
+                    .PreferIdeSettings()
                     .StartApp();
             }
 

@@ -10,7 +10,8 @@
         <ToolbarItem
             Text="Add"
             Icon="ic_plus.png"
-            x:Name="btnAdd" />
+            x:Name="btnAdd"
+            AutomationId="btnAdd"/>
     </ContentPage.ToolbarItems>
     <Grid
         RowSpacing="0">

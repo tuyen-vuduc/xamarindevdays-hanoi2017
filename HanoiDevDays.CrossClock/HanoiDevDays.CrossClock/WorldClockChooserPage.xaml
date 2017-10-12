@@ -16,6 +16,7 @@
         <SearchBar 
             BackgroundColor="{StaticResource ColorPrimary}"
             x:Name="txtQuery"
+            AutomationId="txtQuery"
             Placeholder="Search for city">
             <SearchBar.TextColor>
                 <OnPlatform x:TypeArguments="Color" Android="{StaticResource ColorTextPrimary}" />

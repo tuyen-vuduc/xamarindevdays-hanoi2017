@@ -35,6 +35,11 @@ namespace HaNoiDevDays.UITest
             {
                 worldClock = new WorldClockPageAndroidObject(app);
             }
+            else
+            {
+                worldClock = new WorldClockPageObjectIOS(app);
+            }
+
             worldClockChooser = new WorldClockChooserPageObject(app);
         }
 
@@ -59,7 +64,7 @@ namespace HaNoiDevDays.UITest
             worldClockChooser.SelectCity(random.Next(1, 100) % worldClockChooser.CountCitiesChilds);
             app.Screenshot("Word Clock screen after add clock.");
 
-            worldClock.DeleteClock(0); 
+            worldClock.DeleteClock(0);
         }
     }
 }
