@@ -24,6 +24,7 @@
         <ListView
             Grid.Row="1"
             x:Name="lstClocks"
+            AutomationId="lstClocks"
             RowHeight="97"
             SeparatorVisibility="None"
             CachingStrategy="RecycleElement"
