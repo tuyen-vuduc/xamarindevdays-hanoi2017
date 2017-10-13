@@ -1,4 +1,6 @@
 ﻿
+using System;
+using HanoiDevDays.CrossClock.DTOs;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,6 +9,8 @@ namespace HanoiDevDays.CrossClock
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WorldClockPage : ContentPage
     {
+        readonly WorldClockPageViewModel viewModel;
+
         public WorldClockPage()
         {
             InitializeComponent();
@@ -15,8 +19,23 @@ namespace HanoiDevDays.CrossClock
             {
                 lstClocks.SelectedItem = null;
             };
+            btnAdd.Clicked += async delegate
+            {
+                var chooserPage = new WorldClockChooserPage();
+                chooserPage.TimeZoneSelected += HandleTimeZomeSelected;
+                await Navigation.PushAsync(chooserPage);
+            };
 
-            BindingContext = new WorldClockPageViewModel(Navigation);
+            viewModel = new WorldClockPageViewModel();
+            BindingContext = viewModel;
+        }
+
+        void HandleTimeZomeSelected(object sender, TimeZoneDto timeZone)
+        {
+            if (viewModel.AddClockCommand?.CanExecute(timeZone) == true)
+            {
+                viewModel.AddClockCommand.Execute(timeZone);
+            }
         }
     }
 }

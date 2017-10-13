@@ -21,28 +21,9 @@ namespace HanoiDevDays.CrossClock
             set => SetProperty(ref _Clocks, value);
         }
 
-        readonly INavigation navigation;
-
-        public WorldClockPageViewModel(INavigation navigation)
+        public WorldClockPageViewModel()
         {
-            this.navigation = navigation;
-
             Clocks = new ObservableCollection<WorldClockItemModel>();
-        }
-
-        void HandleTimeZomeSelected(object sender, TimeZoneDto timeZone)
-        {
-            var timeZoneAdded = Clocks.Any(x => timeZone.ZoneName.EndsWith($"/{x.City}", StringComparison.OrdinalIgnoreCase));
-            if (timeZoneAdded)
-            {
-                return;
-            }
-
-            Clocks.Add(new WorldClockItemModel
-            {
-                GmtOffset = timeZone.GmtOffset,
-                City = timeZone.ZoneName.Split('/').Last()
-            });
         }
 
         void SetProperty<T>(ref T backingField, T value, [CallerMemberName]string propertyName = null)
@@ -63,14 +44,16 @@ namespace HanoiDevDays.CrossClock
         ICommand _AddClockCommand;
         public ICommand AddClockCommand
         {
-            get { return (_AddClockCommand = _AddClockCommand ?? new Command<object>(ExecuteAddClockCommand, CanExecuteAddClockCommand)); }
+            get { return (_AddClockCommand = _AddClockCommand ?? new Command<TimeZoneDto>(ExecuteAddClockCommand, CanExecuteAddClockCommand)); }
         }
-        bool CanExecuteAddClockCommand(object obj) { return true; }
-        async void ExecuteAddClockCommand(object obj)
+        bool CanExecuteAddClockCommand(TimeZoneDto timeZone) => false == Clocks.Any(x => timeZone.ZoneName.EndsWith($"/{x.City}", StringComparison.OrdinalIgnoreCase));
+        void ExecuteAddClockCommand(TimeZoneDto timeZone)
         {
-            var chooserPage = new WorldClockChooserPage();
-            chooserPage.TimeZoneSelected += HandleTimeZomeSelected;
-            await navigation.PushAsync(chooserPage);
+            Clocks.Add(new WorldClockItemModel
+            {
+                GmtOffset = timeZone.GmtOffset,
+                City = timeZone.ZoneName.Split('/').Last()
+            });
         }
 
         ICommand _DeleteClockCommand;
