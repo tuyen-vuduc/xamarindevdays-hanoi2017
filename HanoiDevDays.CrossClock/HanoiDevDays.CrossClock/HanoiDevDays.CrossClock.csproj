@@ -53,6 +53,8 @@
     <Compile Include="DTOs\TimeZoneData.cs" />
     <Compile Include="Controls\WorldClockChooserItemCell.cs" />
     <Compile Include="Controls\WorldClockItemViewCell.cs" />
+    <Compile Include="IWorldClockPresenter.cs" />
+    <Compile Include="WorldClockPagePresenter.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -72,9 +74,6 @@
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.4.0.280\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Xaml.dll</HintPath>
-    </Reference>
-    <Reference Include="Naxam.Effects">
-      <HintPath>..\..\packages\Naxam.Effects.1.0.6.3\lib\portable-net45+wp80+win8+wpa81\Naxam.Effects.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -104,5 +103,4 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets'))" />
   </Target>
-  <Import Project="..\..\packages\LiveXAML.1.2.69\build\LiveXAML.targets" Condition="Exists('..\..\packages\LiveXAML.1.2.69\build\LiveXAML.targets')" />
 </Project>

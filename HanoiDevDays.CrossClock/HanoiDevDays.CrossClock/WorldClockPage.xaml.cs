@@ -10,33 +10,37 @@ using System.Linq;
 namespace HanoiDevDays.CrossClock
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class WorldClockPage : ContentPage
+    public partial class WorldClockPage : ContentPage, IWorldClockPage
     {
-        List<WorldClockItemModel> worldClockItems;
-        Random random;
+        IWorldClockPagePresenter presenter;
 
         public WorldClockPage()
         {
             InitializeComponent();
-            worldClockItems = new List<WorldClockItemModel>(12);
+
+            presenter = new WorldClockPagePresenter(this);
+
             lstClocks.ItemSelected += delegate
             {
                 lstClocks.SelectedItem = null;
             };
             btnAdd.Clicked += HandleAddButtonClicked;
+        }
 
-            random = new Random();
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            presenter.OnAppearing();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            presenter.OnDisappearing();
         }
 
         async void HandleAddButtonClicked(object sender, EventArgs e)
         {
-            //worldClockItems.Add(new WorldClockItemModel
-            //{
-            //    City = "Hanoi",
-            //    TimeZone = random.Next(10000, 100000),
-            //    CurrentTime = DateTime.Now.AddHours(random.Next(0, 12))
-            //});
-
             var chooserPage = new WorldClockChooserPage();
             chooserPage.TimeZoneSelected += HandleTimeZomeSelected;
             await Navigation.PushAsync(chooserPage);
@@ -44,31 +48,17 @@ namespace HanoiDevDays.CrossClock
 
         public void HandleDeleteButtonClicked(object sender, WorldClockItemModel item)
         {
-            worldClockItems.Remove(item);
-
-            ReloadData();
+            presenter.RemoveClock(item);
         }
 
         void HandleTimeZomeSelected(object sender, TimeZoneDto timeZone)
         {
-            var timeZoneAdded = worldClockItems.Any(x => timeZone.ZoneName.EndsWith($"/{x.City}", StringComparison.OrdinalIgnoreCase));
-            if (timeZoneAdded)
-            {
-                return;
-            }
-
-            worldClockItems.Add(new WorldClockItemModel
-            {
-                GmtOffset = timeZone.GmtOffset,
-                City = timeZone.ZoneName.Split('/').Last()
-            });
-
-            ReloadData();
+            presenter.AddClock(timeZone);
         }
 
-        void ReloadData()
+        public void UpdateListView()
         {
-            lstClocks.ItemsSource = new List<WorldClockItemModel>(worldClockItems);
+            lstClocks.ItemsSource = new List<WorldClockItemModel>(presenter.Clocks);
         }
     }
 }
