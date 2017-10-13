@@ -4,7 +4,7 @@ using System.Linq;
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
 
-namespace HaNoiDevDays.UITest
+namespace DemoTimePicker.UITest
 {
     public class AppInitializer
     {
@@ -14,7 +14,7 @@ namespace HaNoiDevDays.UITest
             {
                 return ConfigureApp
                     .Android
-                    .InstalledApp("com.vuductuyen.hanoidevdays.crossclock")
+                    .InstalledApp("net.naxam.demotimepicker")
                     .PreferIdeSettings()
                     .StartApp();
             }

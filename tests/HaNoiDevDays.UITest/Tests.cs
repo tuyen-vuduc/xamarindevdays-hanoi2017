@@ -16,11 +16,7 @@ namespace HaNoiDevDays.UITest
         Platform platform;
         WorldClockPageObject worldClock;
         WorldClockChooserPageObject worldClockChooser;
-
-        string[] Queries = {
-            "at",
-        };
-
+         
         public Tests(Platform platform)
         {
             this.platform = platform;
@@ -44,26 +40,21 @@ namespace HaNoiDevDays.UITest
         }
 
         [Test]
-        public void TestAddFiveClocksSuccess()
+        [TestCase("at")]
+        [TestCase("ha")]
+        [TestCase("am")] 
+        public void TestAddTimeZone_RemoveTimeZone(string query)
         {
             Random random = new Random();
-            app.Screenshot("World Clock screen.");
-
-            worldClock.AddClock();
-            app.Screenshot("World Clock Chooser screen.");
-
-            var query =Queries[random.Next(1, 100) %Queries.Length];
-            worldClockChooser.SearchCity(query);
-            app.Screenshot("search city " + query);
+            worldClock.AddClock(); 
+            worldClockChooser.SearchCity(query); 
 
             if (worldClockChooser.CountCitiesChilds == 0)
             {
                 worldClockChooser.ClearQuery();
             }
-
             worldClockChooser.SelectCity(random.Next(1, 100) % worldClockChooser.CountCitiesChilds);
-            app.Screenshot("World Clock screen after add clock.");
-
+            app.WaitForElement(worldClock.ListViewClocks, "waiting for WordClockPage" ,TimeSpan.FromSeconds(1));
             worldClock.DeleteClock(0);
         }
     }
