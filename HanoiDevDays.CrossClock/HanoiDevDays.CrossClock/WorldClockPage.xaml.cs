@@ -23,7 +23,7 @@ namespace HanoiDevDays.CrossClock
             {
                 var chooserPage = new WorldClockChooserPage();
                 chooserPage.TimeZoneSelected += HandleTimeZomeSelected;
-                await Navigation.PushAsync(chooserPage);
+                await Navigation.PushModalAsync(chooserPage);
             };
 
             viewModel = new WorldClockPageViewModel();

@@ -14,12 +14,25 @@ namespace HanoiDevDays.CrossClock
             InitializeComponent();
 
             BindingContext = new WorldClockChooserPageViewModel(Navigation);
+        }
 
-            lstCities.ItemSelected += async delegate
-            {
-                TimeZoneSelected?.Invoke(this, (TimeZoneDto)lstCities.SelectedItem);
-                await Navigation.PopAsync();
-            };
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            lstCities.ItemSelected += HandleCitySelected;
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            lstCities.ItemSelected -= HandleCitySelected;
+        }
+
+        async void HandleCitySelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            TimeZoneSelected?.Invoke(this, (TimeZoneDto)lstCities.SelectedItem);
+            await Navigation.PopModalAsync();
         }
     }
 }

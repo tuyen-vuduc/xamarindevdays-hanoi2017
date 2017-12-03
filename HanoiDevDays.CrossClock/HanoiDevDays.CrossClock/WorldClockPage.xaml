@@ -15,7 +15,6 @@
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem
-            Command="{Binding AddClockCommand}"
             Text="Add"
             Icon="ic_plus.png"
             x:Name="btnAdd"
