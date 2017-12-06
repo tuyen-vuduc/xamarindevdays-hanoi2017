@@ -6,7 +6,7 @@ Xamarin Dev Days - Hanoi 2017 is an annual event for Xamarin Developers communit
 
 This repo contains sample code for applying MVC, MVP and MVVM in Xamarin. The slide could be found [here](./slides/xamarindevdays_hanoi_2017_designsnpractices.pdf)
 
-![MV-whatever](./art/mv-*.png)
+![MV-whatever](./art/mv-whatever.png)
 
 Each pattern is located in its own branch, except MVVM is considered the main one and located in `master` branch
 
